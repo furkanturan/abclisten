@@ -71,7 +71,22 @@ function qpmSelected(elem) {
 //////////////////////////////////////////////////////////////////////////////
 // When the page is loaded
 
-function loadQPM() {
+function loadQPM(sheetIndex) {
+
+  // Clear all existing options first
+  document.getElementById("sheetSelect").innerHTML = sheetTitles[sheetIndex];
+  document.getElementById("sheetList").innerHTML = "";
+
+  // Load the ComboBox with Sheet Names
+  // Populate the list with options:
+  for(var i = 0; i < sheetTitles.length; i++) {
+    var opt = sheetTitles[i];
+    var newoption_li = document.createElement("li");
+    var newoption_a  = document.createElement("a");
+    newoption_a.innerHTML = opt;
+    newoption_li.appendChild(newoption_a);
+    document.getElementById("sheetList").appendChild(newoption_li);
+  }
 
   reloadQPMlist(abc);
 
@@ -88,24 +103,38 @@ function loadQPM() {
     $('#sheetList').toggle();
   });
   
-  // As qmlist changes dynamically for the selected sheet, 
+  // As qpmlist changes dynamically for the selected sheet, 
   // the handler reloads the list with reloadQPMlist()
   $('#sheetList a').on('click', function (ev) {
     ev.preventDefault();
     var index = $(this).parent().index();
-  
+
+    // Update the comboBox
     $('#sheetSelect').text( $(this).text() ).css('opacity', '1');
-  
     $('#sheetList').find('li').eq(index).prependTo('#sheetList');
     $('#sheetList').toggle();
-  
+
+    // Reload the sheet
+    // Update the list of qpms for the selected sheet
     for (i = 0; i < sheetTitles.length; i++) {
       if (sheetTitles[i] == $(this).text()) {
-        abc = sheetABCs[i];
         reloadQPMlist(abc);
+        abc = sheetABCs[i];
         setTune(false);          
       }
     } 
+
+    // Update the URL with the selected sheet name
+    var this_URL = document.URL;
+    var base_url = this_URL;
+    if (this_URL.indexOf('?') != -1)
+      base_url = this_URL.substring(0, this_URL.indexOf('?'));
+    var new_url = base_url;
+    new_url = base_url.concat("?sheet=");
+    new_url = new_url.concat($(this).text().replace(" ","_"));
+    const state = { 'page_id': 1, 'user_id': 1 };
+    history.pushState(state, "Listen", new_url);
+
     return false;
   });
 

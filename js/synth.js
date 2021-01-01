@@ -142,26 +142,11 @@ function setTune(userAction) {
 //////////////////////////////////////////////////////////////////////////////
 // When the page is loaded
 
-function loadSynth() {
+function loadSynth(sheetIndex) {
 
-  // Load the first sheet
-  abc = sheetABCs[0];
-
-  // Optional: Clear all existing options first:
-  document.getElementById("sheetSelect").innerHTML = sheetTitles[0];
-  document.getElementById("sheetList").innerHTML = "";
-
-  // Load the ComboBox with Sheet Names
-  // Populate list with options:
-  for(var i = 0; i < sheetTitles.length; i++) {
-    var opt = sheetTitles[i];
-    var newoption_li = document.createElement("li");
-    var newoption_a  = document.createElement("a");
-    newoption_a.innerHTML = opt;
-    newoption_li.appendChild(newoption_a);
-    document.getElementById("sheetList").appendChild(newoption_li);
-  }
-
+  // Load the sheet
+  abc = sheetABCs[sheetIndex];
+    
   ////////////////////////////////////////////////////////////////////////////
 
   // Prepare the beat blinker
