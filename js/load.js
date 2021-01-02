@@ -47,4 +47,5 @@ function load() {
 
   loadSynth(sheetIndex);
   loadQPM(sheetIndex);
+  loadDownloadLinkByIndex(sheetIndex);
 }

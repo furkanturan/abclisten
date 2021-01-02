@@ -135,6 +135,8 @@ function loadQPM(sheetIndex) {
     const state = { 'page_id': 1, 'user_id': 1 };
     history.pushState(state, "Listen", new_url);
 
+    loadDownloadLinkByName($(this).text());
+
     return false;
   });
 
