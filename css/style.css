@@ -154,3 +154,12 @@ select option {
 .placeholder:hover {
   color: #888888;
 }
+
+/******************************************************************************/
+
+@media screen and (max-width: 900px) {
+	.wrapper, .list a {
+    height: 100vh;
+    font-size: 22px;
+  }
+}
