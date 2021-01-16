@@ -130,8 +130,8 @@ function loadQPM(sheetIndex) {
     if (this_URL.indexOf('?') != -1)
       base_url = this_URL.substring(0, this_URL.indexOf('?'));
     var new_url = base_url;
-    if (new_url.indexOf("listen.html") == -1)
-      new_url = new_url.concat("listen.html");
+    // if (new_url.indexOf("index.html") == -1)
+    // new_url = new_url.concat("index.html");
     new_url = new_url.concat("?sheet=");
     new_url = new_url.concat($(this).text().replace(" ","_"));
     const state = { 'page_id': 1, 'user_id': 1 };
